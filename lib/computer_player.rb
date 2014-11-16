@@ -2,7 +2,7 @@ class ComputerPlayer
   DICTIONARY = File.readlines('./lib/dictionary.txt').map(&:chomp)
 
   def initialize
-    @letters_to_guess = ('a'..'z').to_a
+    @guessed_letters = []
   end
 
   def pick_word
@@ -14,11 +14,29 @@ class ComputerPlayer
   end
 
   def receive_length(word_length)
-    @word_length = word_length
+
+    @working_dictionary = DICTIONARY.select do |word|
+      word.length == word_length
+    end
+
+    update_frequencies
+  end
+
+  def update_frequencies
+    @letter_frequencies = Hash.new { |h, k| h[k] = 0 }
+
+    @working_dictionary.each do |word|
+      word.each_char do |char|
+        @letter_frequencies[char] += 1 unless @guessed_letters.include?(char)
+      end
+    end
+
   end
 
   def guess_letter
-    @letters_to_guess.shuffle!.pop # stupid AI
+    guess = @letter_frequencies.max_by { |char, freq| freq }.first
+    @guessed_letters << guess
+    guess
   end
 
   def confirm(guess)
@@ -32,7 +50,19 @@ class ComputerPlayer
   end
 
   def respond_to(guess, positions)
-    # will update when creating smarter AI
+
+    if positions.empty?
+      # remove all words that contain guessed character if positions.empty?
+      @working_dictionary.reject! { |word| word.include?(guess) }
+    else
+      # if positions is not empty, select all words that have
+      # the guessed character in the right positions
+      @working_dictionary.select! do |word|
+        positions.all? { |pos| word[pos] == guess }
+      end
+    end
+
+    update_frequencies
   end
 
   def inquire_word
