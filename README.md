@@ -21,6 +21,7 @@ This directory contains the game Hangman, programmed in Ruby 2.1.2. This is my f
 #### Contact
 
 Cihangir "John" Okuyan
+
 email: chiryoku@gmail.com
 
 [appacademy]: http://www.appacademy.io/#p-home
