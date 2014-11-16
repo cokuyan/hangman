@@ -1,5 +1,72 @@
-class Hangman
+require_relative 'computer_player'
+require_relative 'human_player'
 
-  
+class Hangman
+  INCORRECT_GUESSES = 6
+
+  # may not be necessary
+  def self.create_board(word_length)
+    Array.new(word_length)
+  end
+
+  # need to initialize players
+  def initialize(guesser, chooser)
+    @guesser = guesser
+    @chooser = chooser
+
+    @guesses_remaining = INCORRECT_GUESSES
+  end
+
+  def run
+    @chooser.pick_word # not yet defined in player classes
+    @word_length = @chooser.word_length # not yet defined in player classes
+    @board = Hangman.create_board(@word_length)
+    @guesser.receive_length(@word_length) # give guesser length of word
+
+    puts "The word to guess is #{@word_length} letters long."
+
+    until @guesses_remaining.zero? || @board.all?
+      play_turn
+    end
+
+    # end game stuff
+    # should change to reflect differences in computer and human play
+    if @board.all?
+      puts "Congratulations! You won!"
+      puts "The word was #{render_board}."
+    else
+      puts "Game Over"
+      puts "Better luck next time"
+      puts "By the way, the word was #{@chooser.inquire_word}"
+    end
+
+  end
+
+  def render_board
+    @board.map { |letter| letter.nil? "_" : letter }.join
+  end
+
+  def play_turn
+    puts "Secret Word: #{render_board}"
+    puts "You have #{@guesses_remaining} guesses remaining."
+
+    # run guesser's turn
+    guess = @guesser.guess_letter # not yet defined in player classes
+
+    # chooser must take response and return if it is in the word and
+    # where
+    positions = @chooser.confirm(guess) # undefined in player classes
+
+    # if positions are given, replace board with those positions
+    # otherwise, take away from guesses remaining
+    if positions.nil?
+      @guesses_remaining -= 1
+    else
+      positions.each { |position| @board[position] = guess }
+    end
+
+    # let guesser see outcome of guess
+    @guesser.respond_to(guess, positions)
+  end
 
 end
