@@ -34,6 +34,7 @@ class ComputerPlayer
   end
 
   def guess_letter
+    sleep 1
     guess = @letter_frequencies.max_by { |char, freq| freq }.first
     @guessed_letters << guess
     guess
@@ -52,6 +53,7 @@ class ComputerPlayer
   def respond_to(guess, positions)
 
     if positions.empty?
+      puts "The letter #{guess} is not in the word."
       # remove all words that contain guessed character if positions.empty?
       @working_dictionary.reject! { |word| word.include?(guess) }
     else

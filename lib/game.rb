@@ -43,8 +43,9 @@ class Hangman
   end
 
   def play_turn
-    puts "Secret Word: #{render_board}"
     puts "Guesses remaining: #{@guesses_remaining}"
+    puts "Secret Word: #{render_board}"
+    puts
 
     # run guesser's turn
     guess = @guesser.guess_letter

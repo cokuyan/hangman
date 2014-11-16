@@ -14,13 +14,16 @@ class HumanPlayer
   end
 
   def receive_length(word_length)
+    puts
+    puts
     puts "The word to guess is #{word_length} letters long."
   end
 
   def guess_letter
-    puts "Guessed letters: #{@guessed_letters.join(", ")}"
+    puts "Guessed letters: #{@guessed_letters.join(", ")}" unless @guessed_letters.empty?
     print "Please pick a letter: "
     guess = gets.chomp
+    puts
     while @guessed_letters.include?(guess)
       puts "Already picked that letter"
       print "Please pick another letter: "
@@ -47,8 +50,16 @@ class HumanPlayer
   def respond_to(guess, positions)
     if positions.empty?
       puts "I'm sorry. The letter #{guess} is not in the word."
+      puts
+      puts "Please press <enter> to continue"
+      gets
+      puts
     else
-      puts "Good guess!"
+      puts "Good guess! The letter #{guess} is in the word!"
+      puts
+      puts "Please press <enter> to continue"
+      gets
+      puts
     end
   end
 
