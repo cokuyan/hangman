@@ -1,5 +1,5 @@
 class ComputerPlayer
-  DICTIONARY = File.readlines('dictionary.txt').map(&:chomp)
+  DICTIONARY = File.readlines('./lib/dictionary.txt').map(&:chomp)
 
   def initialize
     @letters_to_guess = ('a'..'z').to_a

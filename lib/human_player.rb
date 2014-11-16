@@ -18,6 +18,7 @@ class HumanPlayer
   end
 
   def guess_letter
+    puts "Guessed letters: #{@guessed_letters.join(", ")}"
     print "Please pick a letter: "
     guess = gets.chomp
     while @guessed_letters.include?(guess)

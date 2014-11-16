@@ -41,12 +41,12 @@ class Hangman
   end
 
   def render_board
-    @board.map { |letter| letter.nil? "_" : letter }.join
+    @board.map { |letter| letter.nil? ? "_" : letter }.join
   end
 
   def play_turn
     puts "Secret Word: #{render_board}"
-    puts "You have #{@guesses_remaining} guesses remaining."
+    puts "Guesses remaining: #{@guesses_remaining}"
 
     # run guesser's turn
     guess = @guesser.guess_letter

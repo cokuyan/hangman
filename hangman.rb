@@ -18,7 +18,7 @@ response = gets.chomp
 if response == "c"
   guesser = ComputerPlayer.new
 else
-  chooser = HumanPlayer.new
+  guesser = HumanPlayer.new
 end
 
 game = Hangman.new(guesser, chooser)
