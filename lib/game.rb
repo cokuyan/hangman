@@ -28,14 +28,12 @@ class Hangman
     end
 
     # end game stuff
+
     # should change to reflect differences in computer and human play
     if @board.all?
-      puts "Congratulations! You won!"
-      puts "The word was #{render_board}."
+      @guesser.win(render_board)
     else
-      puts "Game Over"
-      puts "Better luck next time"
-      puts "By the way, the word was #{@chooser.inquire_word}"
+      @guesser.lose(@chooser.inquire_word)
     end
 
   end

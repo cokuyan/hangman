@@ -39,4 +39,12 @@ class ComputerPlayer
     @word
   end
 
+  def win(word)
+    puts "So your word is #{word}. That was not hard to guess at all!"
+  end
+
+  def lose(word)
+    puts "Your word was #{word}? Aww, shucks"
+  end
+
 end

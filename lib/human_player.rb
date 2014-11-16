@@ -53,6 +53,19 @@ class HumanPlayer
   end
 
   def inquire_word
+    puts "What was your word?"
+    gets.chomp
+  end
+
+  def win(word)
+    puts "Congratulations! You won!"
+    puts "The word was #{word}."
+  end
+
+  def lose(word)
+    puts "Game Over"
+    puts "Better luck next time"
+    puts "By the way, the word was #{word}"
   end
 
 end
