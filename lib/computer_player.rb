@@ -2,7 +2,7 @@ class ComputerPlayer
   DICTIONARY = File.readlines('dictionary.txt').map(&:chomp)
 
   def initialize
-
+    @letters_to_guess = ('a'..'z').to_a
   end
 
   def pick_word
@@ -14,9 +14,11 @@ class ComputerPlayer
   end
 
   def receive_length(word_length)
+    @word_length = word_length
   end
 
   def guess_letter
+    @letters_to_guess.shuffle!.pop # stupid AI
   end
 
   def confirm(guess)
@@ -30,6 +32,7 @@ class ComputerPlayer
   end
 
   def respond_to(guess, positions)
+    # will update when creating smarter AI
   end
 
 end

@@ -5,10 +5,12 @@ class HumanPlayer
   end
 
   def pick_word
+    puts "How long is your word?"
+    @word_length = Integer(gets.chomp)
   end
 
   def word_length
-    @word.length
+    @word_length
   end
 
   def receive_length(word_length)
@@ -29,6 +31,16 @@ class HumanPlayer
   end
 
   def confirm(guess)
+    positions = []
+    puts "Does your word contain the letter #{guess}? (y/n)"
+    response = gets.chomp
+
+    if response == "y"
+      puts "Which positions?"
+      positions = gets.chomp.split.map{ |pos| Integer(pos) - 1 }
+    end
+
+    positions
   end
 
   def respond_to(guess, positions)
