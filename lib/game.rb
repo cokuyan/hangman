@@ -23,8 +23,6 @@ class Hangman
     @board = Hangman.create_board(@word_length)
     @guesser.receive_length(@word_length) # give guesser length of word
 
-    puts "The word to guess is #{@word_length} letters long."
-
     until @guesses_remaining.zero? || @board.all?
       play_turn
     end
@@ -59,11 +57,9 @@ class Hangman
 
     # if positions are given, replace board with those positions
     # otherwise, take away from guesses remaining
-    if positions.nil?
-      @guesses_remaining -= 1
-    else
-      positions.each { |position| @board[position] = guess }
-    end
+    @guesses_remaining -= 1 if positions.empty?
+
+    positions.each { |position| @board[position] = guess }
 
     # let guesser see outcome of guess
     @guesser.respond_to(guess, positions)
