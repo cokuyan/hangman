@@ -35,4 +35,8 @@ class ComputerPlayer
     # will update when creating smarter AI
   end
 
+  def inquire_word
+    @word
+  end
+
 end

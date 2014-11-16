@@ -18,8 +18,8 @@ class Hangman
   end
 
   def run
-    @chooser.pick_word # not yet defined in player classes
-    @word_length = @chooser.word_length # not yet defined in player classes
+    @chooser.pick_word
+    @word_length = @chooser.word_length
     @board = Hangman.create_board(@word_length)
     @guesser.receive_length(@word_length) # give guesser length of word
 
@@ -49,11 +49,11 @@ class Hangman
     puts "You have #{@guesses_remaining} guesses remaining."
 
     # run guesser's turn
-    guess = @guesser.guess_letter # not yet defined in player classes
+    guess = @guesser.guess_letter
 
     # chooser must take response and return if it is in the word and
     # where
-    positions = @chooser.confirm(guess) # undefined in player classes
+    positions = @chooser.confirm(guess)
 
     # if positions are given, replace board with those positions
     # otherwise, take away from guesses remaining

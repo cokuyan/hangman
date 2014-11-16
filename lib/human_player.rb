@@ -51,4 +51,7 @@ class HumanPlayer
     end
   end
 
+  def inquire_word
+  end
+
 end
